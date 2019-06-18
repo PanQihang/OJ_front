@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="common_head">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background: #1c2b36;">
+            <div class="container" style="width: 100%;">
+                <div class="navbar-header" style="width: 25%;">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand hidden-sm" onclick="openPage('/index/')" style="color: white;font-size: 30px;"><img src="/css/img/logo-middle.png" style="position: absolute; top:0px; height: 50px"></a>
+                </div>
+                <div class="navbar-collapse collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li class="OJnav hidden-sm hidden-md"><a target="首页" onclick="openPage('/index/')" style="font-size:20px">首页</a></li>
+                        <li class="OJnav"><a  target="练习" onclick="openPage('/practice/')" style="font-size:20px">题库</a></li>
+                        <li class="OJnav"><a  target="竞赛" onclick="openPage('/competition/')" style="font-size:20px">竞赛</a></li>
+                        <li class="OJnav"><a target="实验" onclick="openPage('/experiment/')" style="font-size:20px">实验</a></li>
+                        <li class="OJnav"><a target="考试" onclick="openPage('/exam/')" style="font-size:20px">考试</a></li>
+                        <li class="OJnav"><a target="讨论区" onclick="openPage('/discussion/')" style="font-size:20px">讨论区</a></li>
+                        <li class="OJnav"><a target="资源" onclick="openPage('/resource/')" style="font-size:20px">资源区</a></li>
+                        <li class="OJnav"><a  target="帮助" onclick="openPage('/help')" style="font-size:20px">帮助</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right hidden-sm" th:if="${session.user_name!=null}">
+
+                        <li class="dropdown" >
+                            <a id="user_operate" th:text="${session.user_name}"></a>
+                            <ul id="allUserOperate" class="dropdown-menu dropdown-alerts" style="width: 140px;right: 3px;margin-top: 2px;display: none">
+                                <li>
+                                    <a data-toggle='modal' data-target='#resetPassword' onclick="formReset()">
+                                        <div>
+                                            <i class="fa fa-refresh"></i> 修改密码
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a onclick="openPage('/submitStatus/')">
+                                        <div>
+                                            <i class="fa fa-arrow-circle-o-up"></i> 提交状态
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a onclick="openPage('/ranking/')">
+                                        <div>
+                                            <i class="fa fa-sort-numeric-asc"></i> 排行榜
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="a_logout" title="注销">
+                                        <div>
+                                            <i class="fa fa-times-circle"></i> 注销
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right hidden-sm" th:if="${session.user_name==null}">
+                        <li class="dropdown" >
+                            <a id="user_log" onclick="openLoginPage('')">登陆</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal inmodal fade" id="resetPassword" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">修改密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" id="resetPasswordForm" class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-9 droppable sortable ui-droppable ui-sortable"  style="width: 100%">
+                                    <div class="form-group draggable ui-draggable dropped">
+                                        <label class="col-sm-2 control-label">新密码：</label>
+                                        <div class="col-sm-5">
+                                            <input id="newPassword" name="newPassword" type="password"  aria-required="true" aria-invalid="false" class="form-control" placeholder="请输入新密码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-9 droppable sortable ui-droppable ui-sortable"  style="width: 100%">
+                                    <div class="form-group draggable ui-draggable dropped">
+                                        <label class="col-sm-2 control-label">再次输入：</label>
+                                        <div class="col-sm-5">
+                                            <input id="verifyPassword" name="verifyPassword" type="password"  aria-required="true" aria-invalid="false" class="form-control" placeholder="请输入再次输入密码">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" id="closeUserInfoDialog" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="saveNewPassword()">保存</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loginDialog" class="modal fade" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6 b-r">
+                                <h1>欢迎</h1>
+                                <p>登录后，将获取更多D-OJ功能</p>
+                                <p class="text-center">
+                                    <a><i class="fa fa-sign-in big-icon"></i></a>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h1>登录</h1>
+                                <form role="form">
+                                    <input id = "skipPageUrl" hidden="true">
+                                    <div class="form-group">
+                                        <label>用户名：</label>
+                                        <input type="text" id="dialogUserName" placeholder="请输入用户名" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>密码：</label>
+                                        <input type="password" id="dialogUserPassword" placeholder="请输入密码" class="form-control">
+                                    </div>
+
+                                </form>
+                                <div>
+                                    <button onclick="dialogLogin()" class="btn btn-sm btn-primary pull-right m-t-n-xs"><strong>登录</strong>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" th:src="@{/js/staticHf.js}"></script>
+    </div>
+
+    <div th:fragment="common_footer">
+        <footer class="py-5 bg-dark" style="height: 105px;background:#1c2b36;width:100%;">
+            <br>
+            <div class="container">
+                <p class="m-0 text-center text-white" style="font-size: 15px;color: white;">Copyright © 2010-2019
+                    Parabola（李锡祚）工作室 </p>
+            </div>
+            <div class="container">
+                <p class="m-0 text-center text-white" style="font-size: 15px;color: white;">All Rights Reserved.
+                    v2.0 </p>
+            </div>
+            <!-- /.container -->
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>D-OJ</title>
+</head>
+<!--引入通用JS、css资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<div th:replace="common/staticHf :: common_head"></div>
+<body class="gray-bg">
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <ul class="breadcrumb">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/discussion/">讨论区</a></li>
+            <li class="active"><strong>文章列表</strong></li>
+        </ul>
+    <div class="row">
+        <div class="ibox-content text-center" id="shafa">
+            <div class="blank-img">
+                <img src="//static.nowcoder.com/images/sofa.png">
+            </div>
+            <p>帖子还没人发表，快来抢沙发！</p>
+        </div>
+        <div class="col-lg-12" id="PostList">
+        </div>
+
+    </div>
+    </div>
+    <div class="text-center">
+        <div class="btn-group" id="page">
+            <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i>-->
+            <!--</button>-->
+            <!--<button class="btn btn-white">1</button>-->
+            <!--<button class="btn btn-white">2</button>-->
+            <!--<button class="btn btn-white">3</button>-->
+            <!--<button class="btn btn-white">4</button>-->
+            <!--<button class="btn btn-white">5</button>-->
+            <!--<button class="btn btn-white">6</button>-->
+            <!--<button class="btn btn-white">7</button>-->
+            <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i>-->
+            <!--</button>-->
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    var postinfo = [[${info}]];
+</script>
+<script type="text/javascript" th:src="@{/js/OJ/discussion/postList.js}"></script>
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</body>
+</html>

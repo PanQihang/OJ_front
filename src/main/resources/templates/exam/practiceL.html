@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/selectcolor.css}"/>
+    <title>D-OJ</title>
+</head>
+
+<body class="gray-bg">
+<!--引入公用资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<!--引入公用头部-->
+<div th:replace="common/staticHf :: common_head"></div>
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <table >
+                        <tr >
+                            <td width="70%">
+                                <div class="col-sm-7" style="width:100%; height:835px; ">
+                                    <div class="ibox" style="width:100%; height:100%; ">
+                                        <div class="ibox-title">
+                                            <table >
+                                                <tr >
+                                                    <td width="32%">
+                                                        <a id="selectProblemType" class="btn btn-sm btn-primary" style="margin-top:-12px; ">题目类型</a>
+                                                    </td>
+                                                    <td width="68%">
+                                                        <input  id="problemType" type="text" class="form-control" style="width:150px; margin-top:-12px;" readonly="true" value="全部题目"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="ibox-tools" style="margin-top:-21px; ">
+                                                <h5></h5>
+                                            </div>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="project-list">
+                                                <div style="width:100%; padding-top:0px; padding-bottom:0px; ">
+                                                    <table >
+                                                        <tr >
+                                                            <td width="75%" style="padding:0 0 0 0; ">
+                                                                <input id='idOrNameData' type="search" class="form-control input-sm" aria-controls="editable">
+                                                            </td >
+                                                            <td width="30%" style="padding:0 0 0 0; ">
+                                                                <span onclick='sortProblemList(1)' class="btn btn-sm btn-primary">搜索</span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <table id='problemList' class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <td width="15%">
+                                                            当前状态
+                                                        </td>
+                                                        <td width="10%">
+                                                            编号
+                                                        </td>
+                                                        <td width="40%">
+                                                            题目名称
+                                                        </td>
+                                                        <td width="15%">
+                                                            通过率
+                                                            <!--<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="float:right; margin-right:5px; "></span>-->
+                                                        </td>
+                                                        <td width="20%" onclick='sortProblemList(3)'>
+                                                            难度系数
+                                                            <span id='difficultySortAction'  class="glyphicon glyphicon-triangle-top" aria-hidden="true" style="float:right; margin-right:5px; "></span>
+                                                        </td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <!--<tr>
+                                                        <td class="project-status" width="15%">
+                                                            <span class="label label-primary">已解决</span>
+                                                        </td>
+                                                        <td class="project-status" width="10%">
+                                                            666
+                                                        </td>
+                                                        <td class="project-title" width="40%">
+                                                            <a href="#">红黑树</a>
+                                                            &lt;!&ndash;<br>&ndash;&gt;
+                                                            &lt;!&ndash;<small>创建于 2014.08.15</small>&ndash;&gt;
+                                                        </td>
+                                                        <td class="project-completion" width="15%">
+                                                            <small>48%</small>
+                                                            <div class="progress progress-mini">
+                                                                <div style="width: 48%;" class="progress-bar"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="project-people" width="20%">
+                                                            <span >5</span>
+                                                            &lt;!&ndash;<a href="projects.html"><img alt="image" class="img-circle" src="img/a3.jpg"></a>&ndash;&gt;
+                                                        </td>
+                                                    </tr>-->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td width="30%">
+                                <table >
+                                    <tr >
+                                        <td width="100%" height="40%">
+                                            <div class="col-sm-4" style="width:100%; height:320px; ">
+                                                <div class="row row-sm text-center" style="width:100%; ">
+                                                    <div class="col-xs-6">
+                                                        <div class="panel padder-v item">
+                                                            <div id='problemAmount'class="h1 text-info font-thin h1">未知</div>
+                                                            <span  class="text-muted text-xs">题库总量</span>
+                                                            <!--<div class="top text-right w-full">
+                                                                <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="panel padder-v item bg-info">
+                                                            <div id='tryProblemAmount'class="h1 text-fff font-thin h1">未知</div>
+                                                            <span  class="text-muted text-xs">尝试题数</span>
+                                                            <!--<div class="top text-right w-full">
+                                                                <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="panel padder-v item bg-primary">
+                                                            <div id='finishProblemAmount' class="h1 text-fff font-thin h1">未知</div>
+                                                            <span  class="text-muted text-xs">完成题数</span>
+                                                            <!--<div class="top text-right w-full">
+                                                                <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="panel padder-v item">
+                                                            <div id='systemRank'class="font-thin h1">未知</div>
+                                                            <span  class="text-muted text-xs">未完成数</span>
+                                                            <!--<div class="bottom text-left">
+                                                                <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td width="100%" height="60%">
+                                            <div style="width:100%; height:515px; background:gray; ">
+                                                <span style="font-size:25px; color:yellowgreen; ">预留空间</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id='problemTypeList' class="color-group-wrapper color-dropdown-wrapper" style="display: none; position: absolute; left: 28px; top: 49px; z-index: 2999;">
+    <ul class="color-group-panel">
+    </ul>
+    <div class="colors-panel"><p class="colors-panel-title"></p>
+        <ul class="color-list">
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/selectcolor.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/OJ/exam/practiceL.js}"></script>
+</body>
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>D-OJ</title>
+
+    <!--<style>-->
+
+        <!--body{-->
+            <!--text-align:center;-->
+            <!--margin-left:auto;-->
+            <!--margin-right:auto;-->
+        <!--}-->
+        <!--.n{-->
+            <!--width:50%;-->
+            <!--height:51px;-->
+            <!--margin:0 auto;-->
+            <!--font-size:20px;-->
+            <!--display:block;-->
+        <!--}-->
+        <!--#div1 {-->
+            <!--border:solid 1px #CCC;-->
+            <!--border-radius:5px 5px 5px 5px;-->
+            <!--text-shadow: 1px 1px 1px #000;-->
+            <!--margin:150px auto 0 ;-->
+            <!--width:50%;-->
+            <!--height:140px;-->
+        <!--}-->
+        <!--p{-->
+            <!--width:50%;-->
+            <!--height:80px;-->
+            <!--font-size:20px;-->
+            <!--margin:0 auto;-->
+            <!--color:#F00;-->
+            <!--font-weight:900;-->
+        <!--}-->
+        <!--span {-->
+            <!--font-size:20px;-->
+            <!--color:#F00;-->
+            <!--font-weight:900;-->
+        <!--}-->
+    <!--</style>-->
+
+</head>
+<!--引入通用JS、css资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<div th:replace="common/staticHf :: common_head"></div>
+<body>
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <ul class="breadcrumb">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/competition/">竞赛</a></li>
+            <li class="active"><strong>竞赛详情</strong></li>
+        </ul>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <p id="title">第一场周赛</p>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="alert alert-warning" >
+                        <span id="state"></span>
+                        <span id="block"></span>
+
+                    </div>
+                    <h2 id="welcome">欢迎来到第一场周赛</h2>
+                    <br>
+                   <h4 class="text-300"><li class="fa fa-newspaper-o"></li>重要提示</h4>
+                    <ol>
+                        <li>您必须先 报名 后方能参加该场竞赛。我们祝愿您参赛愉快！</li>
+                        <li>所有的解答提交都会自动经过我们严格智能的作弊侦测系统。 如被检查出抄袭、作弊等行为，将会直接导致 参赛资格被取消 以及 至少三周的账号冻结 。 力扣一向非常重视竞赛的公平，为了保障每一位用户的权益，我们会坚持以 零容忍 的态度维护竞赛的公平、公正。</li>
+
+                    </ol>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins" th:if="${info.compinfo.flag=='1'}">
+            <div class="ibox-content">
+                <div class="col-sm-6">
+                    <h4 class="example-title">题目列表</h4>
+                    <div class="example">
+                        <table id = "proTable" class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                            <tr>
+                                <th width="10%">题目ID</th>
+                                <th width="30%">题目名称</th>
+                                <th width="30%">分数</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                    <div class="col-sm-6">
+                        <h4 class="example-title">提交状态</h4>
+                        <div class="example">
+                            <table id = "Table" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="10%">题目</th>
+                                    <th width="12.5%">提交时间</th>
+                                    <th width="25%">状态</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            <!-- End Panel Basic -->
+            <div class="ibox float-e-margins" th:if="${info.compinfo.flag=='2'}">
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-6">
+                            <h4 class="example-title">题目列表</h4>
+                                <div class="example">
+                                    <table id = "proTable" class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th width="10%">题目ID</th>
+                                        <th width="30%">题目名称</th>
+                                        <th width="30%">分数</th>
+                                    </tr>
+                                    </thead>
+                                        <tbody></tbody>
+                                </table>
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 class="example-title">排行榜</h4>
+                            <div class="example">
+                                <table id = "rankTable" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th width="10%">排名</th>
+                                        <th width="25%">姓名</th>
+                                        <th width="25%">ac题数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            </div>
+            <div class="ibox float-e-margins" th:if="${info.compinfo.flag=='0'}">
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-6">
+                            <h4 class="example-title">报名信息</h4>
+                            <div class="example">
+                                   <div id="description">竞赛描述</div>
+
+                                <div>感兴趣的话就赶紧报名吧！</div>
+                            </div>
+                            <div id="enroll">
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <h4 class="example-title">已参加的报名同学</h4>
+                            <div class="example">
+                                <table id = "enrollTable" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th width="50%">序号</th>
+                                        <th width="50%">姓名</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap table -->
+<script th:src="@{/js/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
+<script th:src="@{/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js}"></script>
+<script th:src="@{js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
+
+<!-- Peity -->
+<script th:src="@{/js/demo/bootstrap-table-demo.js}"></script>
+<script th:inline="javascript">
+    var compinfo = [[${info}]];
+    // console.log(info.compinfo.flag);
+</script>
+<script th:src="@{/js/OJ/competition/showComp.js}"></script>
+</body>
+</html>

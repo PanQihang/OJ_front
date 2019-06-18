@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-OJ</title>
+</head>
+
+<body class="gray-bg">
+    <!--引入公用资源-->
+    <div th:replace="common/staticImport :: common_resource"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/slider.css}"/>
+
+    <!--引入公用头部-->
+    <div th:replace="common/staticHf :: common_head"></div>
+    <!-- 右侧悬浮框 -->
+    <div class="anchor">
+        <!-- # 包含了一个位置信息，默认的锚是#top 也就是网页的上端。 -->
+        <a href="#">
+            <div class="anchor_content" style="background: #808182">
+                <div class="point_left anchor_img1" style="background: #808182">
+                    <i class="fa fa-arrow-up" style="font-size: 35px;padding-top: 7px;"></i>
+                </div>
+                返回顶部
+            </div>
+        </a>
+        <a href="#jsq">
+            <div class="anchor_content anchor_img2" style="background: #ea7569;">
+                <div class="point_left " style="background: #ea7569;">
+                    <i class="fa fa-codepen" style="font-size: 35px;padding-top: 7px;"></i>
+                </div>竞赛区
+            </div>
+        </a>
+        <a href="#tlq">
+            <div class="anchor_content" style="background-color: #23b7e5b5;">
+                <div class="point_left anchor_img3" style="background-color: #23b7e5;">
+                    <i class="fa fa-facebook-official" style="font-size: 35px;padding-top: 7px;"></i>
+                </div>讨论区
+            </div>
+        </a>
+        <a href="#tkq">
+            <div class="anchor_content" style="background: #e6a259">
+                <div class="point_left anchor_img4" style="background: #e6a259">
+                    <i class="fa fa-pencil-square-o" style="font-size: 35px;padding-top: 7px;"></i>
+                </div>题库区
+            </div>
+        </a>
+    </div>
+    <div class="rootDiv">
+        <div class="box">
+            <div class="box-pic">
+                <ul class="pic-ul">
+                    <li class="b-img">
+                        <a><img src="/css/img/lunbo1.jpg"></a>
+                    </li>
+                    <li class="b-img">
+                        <a><img src="/css/img/lunbo2.jpg"></a>
+                    </li>
+                    <li class="b-img">
+                        <a><img src="/css/img/lunbo3.jpg"></a>
+                    </li>
+                    <li class="b-img">
+                        <a><img src="/css/img/lunbo4.jpg"></a>
+                    </li>
+                    <li class="b-img">
+                        <a><img src="/css/img/lunbo5.jpg"></a>
+                    </li>
+                    <li class="b-img">
+                        <a><img src="/css/img/lunbo6.jpg"></a>
+                    </li>
+                    <li class="b-img">
+                        <a><img src="/css/img/lunbo1.jpg"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-cir">
+                <div class="cir-ul">
+                    <i class="cir-change"></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+            </div>
+            <div class="btn">
+                <span class="btn-left">&lt;</span>
+            </div>
+            <div class="btn">
+                <span class="btn-right">&gt;</span>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                    <div class="col-sm-4">
+                        <a href="#tlq">
+                            <div class="acm-mod" style="background: #23b7e5">
+                                <div class="acm-mod-pic">
+                                    <i class="fa fa-facebook-official middle-icon"></i>
+                                </div>
+                                <div class="h1 text-fff font-thin h1">讨论区</div>
+                                <p style="color: white;">A题遇到麻烦了？来讨论区交流一下吧！<br>还有精选的帖子呦</p>
+                                <div class="acm-mod-btn">
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#jsq">
+                            <div class="acm-mod" style="background: #ea7569">
+                                <div class="acm-mod-pic">
+                                    <i class="fa fa-codepen middle-icon"></i>
+                                </div>
+                                <div class="h1 text-fff font-thin h1">竞赛区</div>
+                                <div style="color: white;">想要看看自己的实力吗？竞赛是你最好的选择！<br>无论你是几年级，想战就战</div>
+                                <div class="acm-mod-btn">
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#tkq">
+                            <div class="acm-mod" style="background: #e6a259">
+                                <div class="acm-mod-pic">
+                                    <i class="fa fa-pencil-square-o middle-icon"></i>
+                                </div>
+                                <div class="h1 text-fff font-thin h1">题库区</div>
+                                <p style="color: white;">高质量题目分类挑选，挑战连续AC极限<br>你能做的，只有变得更强</p>
+                                <div class="acm-mod-btn">
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+            </div>
+            <!--教学通知、本日排行-->
+            <div class="row" style="padding-top: 50px">
+                <div class="col-sm-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>教学通知</h5>
+                        </div>
+                        <div class="ibox-content" style="height: 360.02px;">
+                            <div class="project-list">
+
+                                <table class="table table-hover" >
+                                    <tbody id="jxtztb">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>本日AC排行榜</h5><small>&nbsp;&nbsp;(每晚12点重新排名)</small>
+                        </div>
+                        <div class="ibox-content" style="height: 360.02px;">
+                            <div class="project-list" id="brACphb">
+                                <!--<img src="/css/img/blank2.jpg" style="height: 330px;padding-left: 28px;">-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--待做列表、题库推荐-->
+            <div class="row" style="padding-top: 50px" th:if="${session.user_name!=null}">
+                <div class="col-sm-6">
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>待做列表</h5>
+                        </div>
+                        <div class="ibox-content" style="height: 360.02px;">
+                            <div class="project-list" >
+                                <table class="table table-hover" id="dzlbTb">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>题库推荐</h5>
+                        </div>
+                        <div class="ibox-content" style="height: 360.02px;">
+                            <div class="project-list" id="tktjTb">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--讨论区-->
+            <div class="row">
+                <div class="module-head clearfix" id="tlq" style="height: 100px;padding-top: 55px;">
+                    <h3 >讨论区</h3>
+                </div>
+                <div class="col-sm-12">
+                    <div class="ibox-content forum-container" id="Parentform">
+                        <div class="text-right"><a onclick="openPage('/discussion/')" style="text-decoration:none;
+color:#333;">查看更多</a></div>
+                        <hr>
+                </div>
+
+            </div>
+            </div>
+            <!--竞赛区-->
+            <div class="row">
+                <div class="module-head clearfix" id="jsq" style="height: 100px;padding-top: 55px;">
+                    <h3 >竞赛区</h3>
+                </div>
+                <div class="col-sm-6" style="padding-right:0;">
+                    <div class="ibox float-e-margins" style="height: 333px;">
+                        <div class="ibox-title" style="border-bottom:none;background:#fff;">
+                            <h5>近期要举行的竞赛</h5>
+                            <div class="text-right"><a onclick="openPage('/competition/')">点击查看更多</a></div>
+                        </div>
+                        <hr>
+                        <div class="project-list">
+                            <div class="contest-upcoming" id="node" >
+                                <div class="big text-right" style="
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    font-size: 80px;
+    color: white;
+    opacity: .25;
+"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                                <div class="h3 text-fff font-thin h3" style="
+    font-weight: 500;
+    line-height: 18px;
+    font-size: 16px;
+    color: #a0a0a0;
+    padding-left: 10px;
+" id="time">目前没有正在举行的比赛</div>
+                                <div class="" style="
+    margin-top: 5px;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 40px;
+    color: black;
+    font-weight: 100;
+    padding-left: 10px;
+"><b><h2 style="
+    font-weight: 600;
+" id="comName">请稍后回来</h2></b></div>
+                                <div class="" style="
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+">
+                                </div>
+                            </div>
+                            <table class="table table-hover">
+                                <tbody id="Comp">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" style="padding-left:0;">
+                    <div class="ibox float-e-margins" style="border-top:none;background-color:#e4eaec;height: 333px;">
+                       <div class="ibox-title" style="border-bottom:none;background-color:#e4eaec;">
+                                <h5>竞赛排名</h5>
+                           <div class="text-right"><a onclick="openPage('/competition/showmorerank')">点击查看更多</a></div>
+                            </div>
+                            <hr>
+                            <div class="project-list" style="width: 578px;height: 245px;overflow:scroll;overflow-x:hidden">
+                            <table class="text-center" style="width:580px;align:center">
+                                <tbody id="rankList">
+                                <tr>
+                                    <td>排名</td>
+                                    <td>班级</td>
+                                    <td>姓名</td>
+                                    <td>AC题数</td>
+                                    <td>参加竞赛次数</td>
+                                </tr>
+                                <!--<tr>-->
+                                    <!--<td>1</td>-->
+                                    <!--<td>李月</td>-->
+                                    <!--<td>3</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>1</td>-->
+                                    <!--<td>李月</td>-->
+                                    <!--<td>3</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>1</td>-->
+                                    <!--<td>李月</td>-->
+                                    <!--<td>3</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>1</td>-->
+                                    <!--<td>李月</td>-->
+                                    <!--<td>3</td>-->
+                                <!--</tr>-->
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <!--题库区-->
+            <div class="row">
+                <div class="module-head clearfix" id="tkq" style="height: 100px;padding-top: 55px;">
+                    <h3 >题库区</h3>
+                </div>
+                <div class="col-sm-12">
+                    <div class="ibox" style="width:100%; height:100%; ">
+                        <div class="ibox-title">
+                            <table>
+                                <tbody>
+                                </tbody></table>
+                            <div class="ibox-tools" style="margin-top:-21px; ">
+                                <h5></h5>
+                            </div>
+                        </div>
+                            <div class="project-list">
+                                <table id="problemList_wrapper" style="width:100%; ">
+                                    <thead>
+                                    <tr role="row">
+                                        <td width="10%" >
+                                        编号
+                                        </td>
+                                        <td width="40%"  >
+                                        题目名称
+                                        </td>
+                                        <td width="15%"  >
+                                        通过率
+                                        </td>
+                                        <td width="20%"  >
+                                        难度系数
+                                        </td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    </table>
+                                </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--教学通知信息弹窗布局开始-->
+    <div class="modal inmodal fade" id="jxtzDialog" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="jxtzDialogTitle"></h4>
+                </div>
+                <div class="modal-body">
+                    <form method="get" id="dialogNoticeForm" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12 droppable sortable ui-droppable ui-sortable" style="width: 100%">
+                                <div class="form-group draggable ui-draggable dropped">
+                                    <label class="col-sm-2 control-label">作者：</label>
+                                    <div class="col-sm-10" id="jxtzDialogZuoZhe" style="padding-top: 7px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 droppable sortable ui-droppable ui-sortable" style="width: 100%">
+                                <div class="form-group draggable ui-draggable dropped">
+                                    <label class="col-sm-2 control-label">创建时间：</label>
+                                    <div class="col-sm-10" id="jxtzDialogCjsj" style="padding-top: 7px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 droppable sortable ui-droppable ui-sortable"  style="width: 100%">
+                                <div class="form-group draggable ui-draggable dropped">
+                                    <label class="col-sm-2 control-label">通知内容：</label>
+                                    <div class="col-sm-10" id="jxtzDialogTznr" style="padding-top: 7px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" id="closeUserInfoDialog" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+<script th:src="@{/js/OJ/tool.js}"></script>
+<script th:src="@{/js/OJ/slider.js}"></script>
+<script th:src="@{/js/OJ/practiceForIndex.js}"></script>
+<script th:inline="javascript">
+
+
+    var userIp = [[${userIp}]];
+</script>
+<script th:src="@{/js/OJ/system/index.js}"></script>
+
+</html>

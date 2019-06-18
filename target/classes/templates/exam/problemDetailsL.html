@@ -1,0 +1,279 @@
+
+<!-- 题目集的数据库分页对应的题目详情页 -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/selectcolor.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/codemirror.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/3024-night.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/erlang-dark.css}"/>
+
+
+    <title>D-OJ</title>
+</head>
+<style>
+    .css-1r79szx-CommentsHead::before {
+        left: 0px;
+    }
+    .css-1r79szx-CommentsHead::after {
+    right: 0px;
+    }
+    .css-1r79szx-CommentsHead::before, .css-1r79szx-CommentsHead::after {
+        position: absolute;
+        top: 10px;
+        content: "";
+        width: calc(50% - 60px);
+        height: 1px;
+        background: rgb(224, 224, 224);
+    }
+    .css-914y8j-transparent-xs-Btn-ToolButton {
+        vertical-align: middle;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        line-height: 20px;
+        cursor: pointer;
+        color: rgb(84, 110, 122);
+        height: 24px;
+        font-size: 12px;
+        user-select: none;
+        border-width: 0px;
+        border-style: initial;
+        border-color: initial;
+        border-image: initial;
+        border-radius: 3px;
+        transition: all 0.18s ease-in-out 0s;
+        outline: 0px;
+        background: transparent;
+        padding: 0px 7px;
+    }
+    .css-1wigilb-Toolbar {
+        margin: 5px 0px 0px;
+    }
+
+</style>
+<body class="gray-bg">
+<!--引入公用资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<!--引入公用头部-->
+<div th:replace="common/staticHf :: common_head"></div>
+<div id='pageBody' class="rootDiv">
+    <div class="wrapper wrapper-content" style="width:100%; height:100%; margin:0 0 0 0; padding:0 0 0 0;  ">
+        <div class="row" style="width:100%;  height:100%; margin:0 0 0 0; padding:0 0 0 0;  ">
+            <div class="row" style=" height:100%; width:100%; margin:0 0 0 0; padding:0 0 0 0; ">
+                <table style="width:100%;  height:100%;  ">
+                    <tr>
+                        <td width="50%" height="100%">
+                            <div class="ibox" style="margin:0 0 0 0; padding:0 0 0 0; width:100%; height:800px; overflow-y:auto; ">
+                                <div class="ibox-content" style="padding:10px 20px 10px 20px; height:790px; ">
+                                    <div class="pull-left">
+                                    </div>
+                                    <div class="pull-right">
+                                                        <span id='proAcPercentageTip'
+                                                              class="label label-primary">AC率:未知</span>
+                                        <span id='proAcNumTip' class="label label-info">AC:未知</span>
+                                        <span id='proSubNumTip'
+                                              class="label label-success">SUB:未知</span>
+                                    </div>
+                                    <div class="text-center article-title "
+                                         style="height:35px; margin: 20px 0 15px 0; ">
+                                        <span id='problemName' style="font-size:25px; ">题目名称</span>&nbsp;<span
+                                            style="font-size:11px; margin-left:10px; ">题目编号:</span><span
+                                            id='problemId' style="font-size:11px;">题目编号</span>
+                                    </div>
+                                    <!--<textarea id='problemDescription' style="width:100%; resize:none; " readonly="true"> </textarea>-->
+                                    <!--<pre id="problemDescription"></pre>-->
+                                    <div class="tabs-container">
+                                        <ul class="nav nav-tabs" id="Chose">
+                                            <li class="active"><a data-toggle="tab" href="#tab-0" aria-expanded="true">题目描述</a>
+                                            </li>
+                                            <li><a data-toggle="tab" href="#tab-1" aria-expanded="false">评论</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                        <div id="tab-0" class="tab-pane active">
+                                    <p id="problemDescription"></p>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h3>输入描述</h3>
+                                            <div class="social-feed-box"
+                                                 style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="inputDescription"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                            </div>
+                                            <h3>输出描述</h3>
+                                            <div class="social-feed-box"
+                                                 style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="outputDescription"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                            </div>
+                                            <h3>输入样例</h3>
+                                            <div class="social-feed-box"
+                                                 style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="inputSample"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                            </div>
+                                            <h3>输出样例</h3>
+                                            <div class="social-feed-box"
+                                                 style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="outputSample"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                            </div>
+                                            <div style="border:0px solid; margin:10px 0 15px 0; padding:0 0 0 0; ">
+                                                    <span id='MemoryThresholdTip'
+                                                          class="badge badge-danger">内存阀值:未知</span>
+                                                <span id='RunTimeThresholdTip'
+                                                      class="badge badge-danger">耗时阀值:未知</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div id="tab-1" class="tab-pane">
+                                        <div class="text-center" id="publicoff" style="display: none;"><br><br><h1>抱歉在考试，实验及竞赛中，此功能暂未开放！</h1></div>
+                                        <div id="reply" >
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <br>
+                                        <div class="ibox-tools" id="replybtton">
+                                            <a title="评论" data-toggle='modal' onclick="ReplyPro()" class="btn btn-primary btn-xs" >评论</a>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div class="content">
+                                            <div class="css-1r79szx-CommentsHead e5i1odf4" style="position: relative;
+    color: rgb(224, 224, 224);
+    text-align: center;
+    margin: 10px 0px;">评论</div>
+                                            <div class="content" >
+                                                <div class="content text-center" id="shafa">
+                                                    <div class="blank-img">
+                                                        <img src="//static.nowcoder.com/images/sofa.png">
+                                                    </div>
+                                                    <p>此题目还没人评论，快来抢沙发！</p>
+                                                </div>
+                                                <div class="content" style="overflow:scroll;overflow-x:hidden;height:420px;">
+                                                    <ul class="media-list" id="replyList">
+                                                    </ul>
+                                                </div>
+                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td width="50%" height="100%">
+                            <div class="ibox " style="margin:0 0 0 0; padding:0 0 0 0; width:100%; height:800px; overflow-y:auto; ">
+                                <div class="ibox-content" style="padding:10px 20px 10px 20px; height:790px;">
+
+                                    <div>
+                                        <div class="controls">
+                                            <span>编程语言:</span>
+                                            <input class="ck-code" type="radio" name="script_once_type"
+                                                   id="languageCPP" checked> C++
+                                            <input class="ck-code" type="radio" name="script_once_type"
+                                                   id="languageC" > C
+                                            <input class="ck-code" type="radio" name="script_once_type" onclick="toastr.warning('为便于系统测试，请将以Java为语言提交的代码的主类名设置为Temp', '提示！')"
+                                                   id="languageJava"> Java
+                                            <input class="ck-code" type="radio" name="script_once_type"
+                                                   id="languagePython"> Python3
+                                        </div>
+                                        <div class="controls" style="margin:2px 0 5px 0; ">
+                                            <span>编码背景:</span>
+                                            <select id='selectEditAreaStyle'>
+                                                <option selected>default</option>
+                                                <option>3024-night</option>
+                                                <option>erlang-dark</option>
+                                            </select>
+                                        </div>
+                                        <div style='width:100%; height:600px;'>
+                                            <textarea id="codeEditArea"></textarea>
+                                        </div>
+                                    </div>
+                                    <div id='resultArea' class="ibox-title" style="width:100%; ">
+                                        <span>提交结果:</span><span id='submitResult' style="color:darkgrey; ">待提交</span>&nbsp;
+                                        <span id="submitInf" style="color:gainsboro; "> </span>
+                                        <div class="pull-right" style=" margin-top:-10px; ">
+                                            <table >
+                                                <tr>
+                                                    <td >
+                                                        <div id='loadingDiv' class="row sk-spinner sk-spinner-fading-circle" style="margin-right:8px; display:none;">
+                                                            <div class="sk-circle1 sk-circle"></div>
+                                                            <div class="sk-circle2 sk-circle"></div>
+                                                            <div class="sk-circle3 sk-circle"></div>
+                                                            <div class="sk-circle4 sk-circle"></div>
+                                                            <div class="sk-circle5 sk-circle"></div>
+                                                            <div class="sk-circle6 sk-circle"></div>
+                                                            <div class="sk-circle7 sk-circle"></div>
+                                                            <div class="sk-circle8 sk-circle"></div>
+                                                            <div class="sk-circle9 sk-circle"></div>
+                                                            <div class="sk-circle10 sk-circle"></div>
+                                                            <div class="sk-circle11 sk-circle"></div>
+                                                            <div class="sk-circle12 sk-circle"></div>
+                                                        </div>
+                                                    </td>
+                                                    <td >
+                                                        <button id='submitCodeBtn' onclick='submitCode()' class="btn btn-primary btn-m" type="button">
+                                                            提交代码
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--提交代码后的等待图标（有没有必要呢，想想.....）-->
+<div class="spiner-example" style="position:absolute; margin:0 auto; display:none; ">
+    <div class="sk-spinner sk-spinner-fading-circle">
+        <div class="sk-circle1 sk-circle"></div>
+        <div class="sk-circle2 sk-circle"></div>
+        <div class="sk-circle3 sk-circle"></div>
+        <div class="sk-circle4 sk-circle"></div>
+        <div class="sk-circle5 sk-circle"></div>
+        <div class="sk-circle6 sk-circle"></div>
+        <div class="sk-circle7 sk-circle"></div>
+        <div class="sk-circle8 sk-circle"></div>
+        <div class="sk-circle9 sk-circle"></div>
+        <div class="sk-circle10 sk-circle"></div>
+        <div class="sk-circle11 sk-circle"></div>
+        <div class="sk-circle12 sk-circle"></div>
+    </div>
+</div>
+<script th:inline="javascript">
+    var Info = [[${info}]];
+    console.log("####info对象的内容如下");
+    console.log(Info);
+
+</script>
+<script type="text/javascript" th:src="@{/js/OJ/exam/codemirror.js}"></script>
+<script type="text/javascript" th:src="@{/js/clike.js}"></script>
+<script type="text/javascript" th:src="@{/js/python.js}"></script>
+<script type="text/javascript" th:src="@{/js/OJ/exam/problemDetailsL.js}"></script>
+</body>
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</html>

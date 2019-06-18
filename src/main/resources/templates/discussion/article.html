@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>D-OJ</title>
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+</head>
+<body class="gray-bg">
+<!--引入通用JS、css资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<div th:replace="common/staticHf :: common_head"></div>
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <ul class="breadcrumb">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/discussion/">讨论区</a></li>
+            <li class="active"><strong>文章详情</strong></li>
+        </ul>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div >
+                            <b><h1 id="title"></h1></b>
+                            <div class="big m-b-xs">
+                                <strong id="username">郝 影</strong> </strong><span ><i class="fa fa-clock-o"></i><span id="time"></span> </span>
+                            </div>
+                            <div class="big text-right">
+                                <div><i class="fa fa-comments-o"> </i> <span id="comment"></span> 评论 |
+                                    <i class="fa fa-eye"> </i> <span id="view"></span> 浏览|
+                                    <i class="fa fa-thumbs-up"></i><span id="zan"></span> 点赞</div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <p id="content">kdcjnk</p>
+                            <hr>
+                            <div class="small text-right">
+                                <div>
+                                    <a class="btn btn-xs btn-primary" href="#replyspace" target="_self" title="回帖" ><i class="fa fa-pencil"></i> 评论 </a>
+
+                                    <button onclick="postzan()"> <i class="fa fa-thumbs-up"></i><span id="iszan"></span></button></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="big m-b-xs">
+                        &nbsp&nbsp&nbsp;
+                        <h2 id="Replynum"></h2>
+                    </div>
+                    <div class="ibox-content text-center" id="shafa">
+                    <div class="blank-img">
+                        <img src="//static.nowcoder.com/images/sofa.png">
+                    </div>
+                    <p>帖子还没人回复，快来抢沙发！</p>
+                </div>
+                    <div class="ibox-content">
+                        <ul class="media-list">
+
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <hr>
+                <div class="text-center">
+                    <div class="btn-group" id="page">
+                        <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i>-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-white">1</button>-->
+                        <!--<button class="btn btn-white">2</button>-->
+                        <!--<button class="btn btn-white">3</button>-->
+                        <!--<button class="btn btn-white">4</button>-->
+                        <!--<button class="btn btn-white">5</button>-->
+                        <!--<button class="btn btn-white">6</button>-->
+                        <!--<button class="btn btn-white">7</button>-->
+                        <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i>-->
+                        <!--</button>-->
+                    </div>
+                </div>
+                <a id="replyspace"></a>
+                <div id="reply" >
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="ibox-tools">
+                    <a title="评论" data-toggle='modal' onclick="replyPost()" class="btn btn-primary btn-xs" >回帖</a>
+                </div>
+            </div>
+        </div>
+
+</div>
+</div>
+
+
+
+<!--回复评论编辑-->
+<!--<div id="replyreply">-->
+    <!--<textarea placeholder="请输入你的观点" class="reply-input reply-input-textarea js-ipt" style="resize: none; height: 50px; width: 541px;"></textarea>-->
+    <!--<button><i class="fa fa-comments-o"> 评论 </i></button>-->
+<!--</div>-->
+
+<!--全局js-->
+<script type="text/javascript" th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/summernote/summernote-zh-CN.js}"></script>
+<script th:inline="javascript">
+    var Postinfo = [[${info}]];
+</script>
+
+<!--自定义js-->
+<script type="text/javascript" th:src="@{/js/OJ/discussion/articel.js}"></script>
+</body>
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</html>

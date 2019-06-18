@@ -1,0 +1,46 @@
+server:
+  port: 80
+  servlet:
+    session:
+      timeout: 480m
+  tomcat:
+    max-connections: 20000
+    max-threads: 2000
+    resource:
+      allow-caching: true
+spring:
+  profiles:
+    active: dev
+  fileUploadPath:
+    path: C:/OJ/oj_file/
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: test123
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+    timeout: 10000
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/teaching?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useAffectedRows=true
+    username: root
+    password: 123456
+#    hikari:
+#      maximum-pool-size: 1000
+#      connection-timeout: 120000
+#    type: com.zaxxer.hikari.HikariDataSource
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  resources:
+    static-locations: classpath:/static,classpath:/templates,file:${spring.fileUploadPath.path}
+logging:
+  path: /root/OJ/oj_front_log

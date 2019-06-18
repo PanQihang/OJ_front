@@ -1,0 +1,140 @@
+/*
+* @Author: Marte
+* @Date:   2019-05-03 18:54:05
+* @Last Modified by:   Marte
+* @Last Modified time: 2019-05-11 17:11:48
+*/
+ /* class = "hhhh" style="width:100%; height:96px; position:relative;" */
+
+*{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.box{
+    background-position: center center;
+    position: relative;
+    width: 1200px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.box .pic-ul{
+    width: 8400px;
+    height: 400px;
+    position: absolute;
+    left: 0px;
+}
+.box .pic-ul li{
+    float: left;
+}
+.box .pic-ul li img{
+    width: 1200px;
+    height: 400px;
+}
+
+.box .box-cir{
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    bottom: 10px;
+}
+.box .box-cir .cir-ul {
+    width: 120px;
+    height: 10px;
+    margin: 0 auto;
+}
+.box .box-cir .cir-ul i{
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px 0 5px;
+    background-color: gray;
+}
+.box .box-cir .cir-ul .cir-change{
+    background-color: white;
+}
+
+.box .btn{
+    opacity: 0.7;
+}
+.box .btn:hover{
+    opacity: 0.95;
+}
+.box .btn span {
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    width: 50px;
+    height: 70px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 70px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.box .btn .btn-left{
+    left: 20px;
+}
+.box .btn .btn-right{
+    right: 20px;
+}
+
+/* 右侧悬浮框 */
+.anchor{
+    width: 120px;
+    height: 240px;
+    position: fixed;
+    margin-top: 100px;
+    background-color: transparent;
+    z-index: 5;
+    right:-120px;
+}
+
+.anchor a{
+    display: block;
+    width: 120px;
+    height: 50px;
+    margin-bottom:10px;
+    cursor: pointer;
+}
+
+.anchor a .anchor_content {
+position:absolute;
+height:50px;
+width: 120px;
+text-align:center;
+font-size: 20px;
+text-decoration: none;
+line-height: 50px;
+background-color: #444b53;
+border-radius:5px;
+color:#444b53;
+    /*opacity: 0.5;*/
+}
+
+.anchor a .anchor_content .point_left{
+position:absolute;
+left:-50px;
+width:45px;
+height:50px;
+border-radius:5px;
+margin-bottom:10px;
+background-color: #444b53;
+color:#fff;
+font-weight:bolder;
+font-size:16px;
+/*opacity: 0.5;*/
+}
+.anchor a .anchor_content .anchor_img1{
+    /* background-image: url(../img/hh.png);
+    background-size: 100% 100%;
+    background-position:center; */
+}
+.anchor a .anchor_content:hover{
+background-color:#08c;
+color: #fff;
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>D-OJ</title>
+</head>
+<!--引入通用JS、css资源-->
+
+<script type="text/javascript">
+
+    toastr.options = {
+        closeButton: false,
+        debug: false,
+        progressBar: true,
+        positionClass: "toast-top-center ",
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
+
+</script>
+<body class="gray-bg">
+<div th:replace="common/staticImport :: common_resource"></div>
+<div th:replace="common/staticHf :: common_head"></div>
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <ul class="breadcrumb">
+            <li><a href="/index">首页</a></li>
+            <li class="active"><strong>讨论区</strong></li>
+        </ul>
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="ibox-content m-b-sm border-bottom">
+                <div class="p-xs">
+                    <div class="pull-left m-r-md">
+                        <i class="fa fa-globe text-navy mid-icon"></i>
+                    </div>
+                    <h2>欢迎来到讨论区</h2>
+                    <span>你可以自由选择你感兴趣的话题。</span>
+                    <div class="ibox-tools">
+                        <a title="发布" data-toggle='modal' data-target='#myModal5' class="btn btn-primary btn-xs" onclick="resetDialog()">我要发布</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox-content forum-container" id="parentTest">
+
+                <div class="forum-title">
+                    <div class="pull-right forum-desc">
+                        <samll >总帖子数： </samll>
+                        <small id="sumpost"> </small>
+                    </div>
+                    <h3>全部话题</h3>
+                </div>
+                <!--话题填充位置-->
+
+            </div>
+
+            <div class="forum-title">
+                <h3>精选热帖</h3>
+            </div>
+
+            <div class="ibox-content forum-container" id="Parentform">
+
+                <!--精选帖子填充位置-->
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="text-center">
+        <div class="btn-group" id="page">
+            <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i>-->
+            <!--</button>-->
+            <!--<button class="btn btn-white">1</button>-->
+            <!--<button class="btn btn-white">2</button>-->
+            <!--<button class="btn btn-white">3</button>-->
+            <!--<button class="btn btn-white">4</button>-->
+            <!--<button class="btn btn-white">5</button>-->
+            <!--<button class="btn btn-white">6</button>-->
+            <!--<button class="btn btn-white">7</button>-->
+            <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i>-->
+            <!--</button>-->
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--弹窗布局开始-->
+<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="dialogTitle">我要发布</h4>
+            </div>
+            <div class="modal-body">
+                <form method="get" id="dialogNoticeForm" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-9 droppable sortable ui-droppable ui-sortable" style="width: 100%">
+                            <div class="form-group draggable ui-draggable dropped">
+                                <label id="lable1" class="col-sm-2 control-label">标题：</label>
+                                <div class="col-sm-5">
+                                    <input id="postTitle" name="dialogNoticeTitle" type="text"  aria-required="true" aria-invalid="false" class="form-control" placeholder="请输入标题">
+                                    <input id="dialogNoticeId" type="text" hidden>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9 droppable sortable ui-droppable ui-sortable" style="width: 100%">
+                            <div class="form-group draggable ui-draggable dropped">
+                                <label id="lable2" class="col-sm-2 control-label">话题：</label>
+
+                                <div class="col-sm-5">
+                                    <select id="TopicSubject"  class="form-control" >
+                                        <option value="-1">请选择话题</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-9 droppable sortable ui-droppable ui-sortable"  style="width: 100%">
+                            <div class="form-group draggable ui-draggable dropped">
+                                <label class="col-sm-2 control-label">发帖内容：</label>
+                                <div class="col-sm-5">
+                                    <div class="ibox-content no-padding" style="width:600px;">
+                                        <div class="summernote" id="content">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" id="closeUserInfoDialog" data-dismiss="modal">关闭</button>
+                <button id="button1" type="button" class="btn btn-primary" onclick="AddTopic()">保存</button>
+            </div>
+        </div>
+    </div>
+</div><!-- 全局js -->
+<!--<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>-->
+
+<!-- 自定义js -->
+<script type="text/javascript" th:src="@{/js/OJ/discussion/bbs.js}"></script>
+
+<script type="text/javascript" th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/summernote/summernote-zh-CN.js}"></script>
+
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</body>
+</html>

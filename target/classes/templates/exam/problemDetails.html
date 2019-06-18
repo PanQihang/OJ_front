@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-OJ</title>
+</head>
+<body class="gray-bg">
+<!--引入公用资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <div class="animated fadeInRight">
+        <div class="row col-sm-9">
+            <div class="ibox-title text-center">
+                <h2 id="dialogProblemName"></h2>
+                <div class="ibox-tools">
+                    <button type="button" class="btn btn-primary">查看排行</button>
+                    <button type="button" class="btn btn-primary">提交代码</button>
+                </div>
+            </div>
+            <!--<div class="text-center article-title">-->
+                <!--<h2 id="dialogProblemName"></h2>-->
+            <!--</div>-->
+        </div>
+        <div class="row col-sm-10">
+            <div class="col-sm-3 ">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <h3>难度等级：<label id="dialogProblemRank"></label> </h3>
+                        </div>
+                        <div class="form-group">
+                            <h3>时间限制：<label id="dialogProblemMaxTime"></label> </h3>
+                        </div>
+                        <div class="form-group">
+                            <h3>内存限制：<label id="dialogProblemMaxMemory"></label> </h3>
+                        </div>
+                        <div>
+                            <div>
+                                <span>AC率:<span id="ac_rate"></span> </span>
+                                <small class="pull-right"><span id="ac"></span>/<span id="sum"></span></small>
+                            </div>
+                            <div class="progress progress-small">
+                                <div style="width: 0%;" class="progress-bar" id="rate"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7 ">
+                <div class="well">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            题目描述
+                        </div>
+                        <div class="panel-body">
+                            <p id="desc"></p>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            输入描述
+                        </div>
+                        <div class="panel-body">
+                            <p id="dialogProblemInType"></p>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            输出描述
+                        </div>
+                        <div class="panel-body">
+                            <p id="dialogProblemOutType"></p>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            输入样例
+                        </div>
+                        <div class="panel-body">
+                            <p id="dialogProblemInSample"></p>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            输出样例
+                        </div>
+                        <div class="panel-body">
+                            <p id="dialogProblemOutSample"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/OJ/exam/problemDetails.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plugins/ionRangeSlider/ion.rangeSlider.min.js}"></script>
+</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="'btn btn-primary"  data-dismiss="modal">关闭</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>D-OJ</title>
+    </head>
+
+    <body>
+        <div th:replace="common/staticImport :: common_resource"></div>
+        <div th:replace="common/staticHf :: common_head"></div>
+        <div class="rootDiv">
+            <div class="wrapper wrapper-content">
+                <ul class="breadcrumb">
+                    <li><a href="/index">首页</a></li>
+                    <li class="active"><strong>帮助</strong></li>
+                </ul>
+            <div class="jumbotron">
+                <div class="post"><h2 class="title">关于提交代码返回的信息解释.</h2>
+                    <div class="entry" style="word-wrap: break-word; word-break: normal "><h3>1. Accepted ---
+                        提交成功<br><span style="color:#e53333;">2.PresentationError</span><span style="color:#e53333;">&nbsp;</span><span
+                                style="color:#e53333;">---</span><span style="color:#e53333;">&nbsp;</span><span
+                                style="color:#e53333;">格式错误(注意最后一行的回车)<br></span>3.WrongAnswer&nbsp;---&nbsp;答案错误<br>4.RuntimeError&nbsp;---&nbsp;运行过程中错误,包括死循环等
+                        &nbsp;&nbsp;<br>5.TimeLimitExceed&nbsp;---&nbsp;超出规定编译时间(代码运行时间过长)<br>6.MemoryLimitExceed&nbsp;---&nbsp;超出规定内存<br>7.SystemCallError&nbsp;---&nbsp;系统调用错误<br>8.CompileError&nbsp;---&nbsp;编译错误<br>9.SystemError&nbsp;---&nbsp;系统错误<br>10.超时,到查看状态处查看&nbsp;---&nbsp;异常错误,非代码原因<br><span
+                                style="color:#e53333;">11.含违规字符</span><span style="color:#e53333;">&nbsp;</span><span
+                                style="color:#e53333;">---</span><span style="color:#e53333;">&nbsp;请</span><span
+                                style="color:#e53333;">检查包含了什么违规代码 -&gt;</span>（"asm", "dir", "kill", "time",
+                        "exec","fork", "create", "nice", "mk", "setu","setg", "sets", "sete", "getu", "getp","getg",
+                        "link", "tmp", "wait", "system","own", "pause", "sock", "signal", "raise","sleep", "truncate",
+                        "chroot", "sigsuspend","remove", "open", "close","window","windows"）&nbsp;<br>12.无权提交&nbsp;---&nbsp;题目限制提交
+                    </h3><br>
+                        <h3><font style="color:green">正确率：</font><br>例如：一题有2个测试数据，只通过一个正确率则为50%，3个中通过1个为33%。<br>当然每题测试数据数量不一样，对于只有一个测试数据的当然只会是0%或100%。
+                            加入正确率对考试有帮助，成绩是按正确率给分的。另外，提示PresentationError（格式错误）也会给满分。
+
+                        </h3></div>
+                </div>
+            </div>
+            <!-- /.jumbotron -->
+
+        </div>
+        </div>
+    </body>
+    <div th:replace="common/staticHf :: common_footer"></div>
+    <script>
+        drawNavAct(7);
+    </script>
+</html>

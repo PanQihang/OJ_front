@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>D-OJ</title>
+
+</head>
+<!--引入通用JS、css资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<div th:replace="common/staticHf :: common_head"></div>
+<div class="rootDiv">
+    <div class="top"></div>
+    <div class="wrapper wrapper-content">
+        <ul class="breadcrumb">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/competition/">竞赛</a></li>
+            <li class="active"><strong>全校排名</strong></li>
+        </ul>
+        <div class="col-sm-12">
+    <p class="text left">全校排名</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs" id="Chose">
+                        <li class="active"><a data-toggle="tab" href="#tab-0" aria-expanded="true">1~30</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="acc">
+                        <div id="tab-0" class="tab-pane active">
+                            <div class="panel-body">
+                            <div class="ibox-content">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>排名</th>
+                                        <th>姓名</th>
+                                        <th>班级</th>
+                                        <th>AC题数</th>
+                                        <th>参加竞赛次数</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody id="rankList">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                        </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+</div>
+<script th:inline="javascript">
+    var rankinfo = [[${info}]];
+</script>
+<script type="text/javascript" th:src="@{/js/OJ/competition/showrank.js}"></script>
+</body>
+</html>

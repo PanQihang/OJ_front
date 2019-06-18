@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>D-OJ</title>
+
+</head>0
+<style type="text/css" media="screen">
+
+    div
+    {
+        display:block;}
+    *{
+        margin:0;
+        padding:0;
+        text-decoration:none;
+    }
+    html body{
+        width:100%;
+        height:100%;
+    }
+
+    .top{
+        position:absolute;
+        height:53%;
+        width:100%;
+        background-color:#2f4050;
+        top:4%;
+        text-align: center;
+    }
+    .top-img{
+        width:100%;
+        margin-top:5%;
+        height:30%;
+        text-align: center;
+
+    }
+    .top-title{
+        margin-top:40px;
+        font-size:2em;
+        text-align: center;
+    }
+    .top-title2{
+        font-size:1.2em;
+        text-align: center;
+        color:whitesmoke;
+        font-weight:700;
+    }
+    .media-container{
+        /* background-color:black; */
+        position:absolute;
+        top:50%;
+        left:20%;
+        height:32%;
+        width:62%;
+        overflow:hidden;
+    }
+    .card1{
+        float:left;
+        width:59%;
+        height:100%;
+        background-color:#fffc43;
+        position:relative;
+        padding:10px;
+        margin-right:30px;
+        border-radius:20px;
+        background: #ffd479;
+        background: -webkit-gradient(linear, left top, left bottom, from(#fffc43), to(#ffd479));
+        background: -webkit-linear-gradient(#fffc43, #ffd479);
+        background: -o-linear-gradient(#fffc43, #ffd479);
+        background: linear-gradient(#fffc43, #ffd479);
+    }
+    .card2{
+        padding:10px;
+        float:right;
+        width:31%;
+        height:100%;
+        background-color:purple;
+        position:relative;
+        border-radius:20px;
+        background: #e24ce1;
+        background: -webkit-gradient(linear, left top, left bottom, from(#cc99ff), to(#e24ce1));
+        background: -webkit-linear-gradient(#cc99ff, #e24ce1);
+        background: -o-linear-gradient(#cc99ff, #e24ce1);
+        background: linear-gradient(#cc99ff, #e24ce1);
+    }
+    .bottom{
+        margin-top:2%;
+        padding:15px;
+        top:80%;
+        left:20%;
+        width:63%;
+        height:91%;
+        position:absolute;
+    }
+    .bottom-left{
+        border-radius:30px;
+        margin-right:20px;
+        position:relative;
+        float:left;
+        width:42.7%;
+        height:99%;
+        border:1px solid #d6d6d6;
+        /*background-color:#223366;*/
+    }
+    .left-top{
+        position:absolute;
+        width:100%;
+        height:auto;
+        /*border:1px solid #b7b7b7;*/
+    }
+    .left-top .img-index{
+        height: 50px;
+        margin: 0 8px 0 0;
+        border:0;
+    }
+
+    .left-media{
+        position:absolute;
+        top:10%;
+        width:100%;
+        height:25.55%;
+
+    }
+    .left-bottom{
+        border-radius:30px;
+        position:relative;
+        top:40%;
+        width:100%;
+        height:auto;
+        background: #fafafa;
+    }
+    .bottom-right{
+        border-radius:30px;
+        position:relative;
+        float:right;
+        width:52%;
+        height:99%;
+        border:1px solid #d3d3d3;
+        background: #fafafa;
+        /*background-color:red;*/
+
+    }
+    .bottom-title{
+        font-size:2em;
+        font-weight:600;
+        color: #bcc2c6;
+        flex:1 0 auto;
+    }
+    .winner{
+        cursor:pointer;
+        border-radius:1020px;
+        position:absolute;
+        height:auto;
+        width:auto;
+    }
+    .winner.top-1{
+        border:1px solid #d7a807;
+        left:calc(50% - 60px);
+    }
+    .winner.top-2{
+        border:1px solid #ababab;
+        left:5%;
+        bottom:0;
+    }
+    .winner.top-3{
+        border:1px solid #d77c44;
+        right:5%;
+        bottom:0;
+    }
+    .winner .img{
+        height:100px;
+        width:100px;
+        margin:5px;
+        text-align:center;
+        background:rgba(255,255,255,0.4);
+        color:#373737;
+        font-size:40px;
+        opacity: .75;
+        border-radius:1020px;
+    }
+    .left-media .name-tag{
+        position: absolute;
+        bottom: -18px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .left-media .name-tag .content{
+        padding: 2px 5px;
+        display: inline-block;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: pre;
+        margin: auto;
+        background: white;
+        border-radius: 5px;
+        opacity:.9;
+    }
+
+</style>
+<!--引入通用JS、css资源-->
+<script type="text/javascript">
+
+    toastr.options = {
+        closeButton: false,
+        debug: false,
+        progressBar: true,
+        positionClass: "toast-top-center ",
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "1000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
+
+</script>
+<body class="gray-bg" style="min-height:100%;">
+<div th:replace="common/staticImport :: common_resource"></div>
+<div th:replace="common/staticHf :: common_head"></div>
+<div class="rootDiv" style="">
+        <div class="top">
+            <div class="top-img">
+            <img src="/css/img/1.png" alt="" width="10%" height="100%">
+        </div>
+            <div class="top-title"><h1 style="font-weight: 600; color: white;">民大竞赛</h1></div>
+            <div class="top-title2"><p>快来参加每周排位赛,提升你的全校排名</p></div>
+        </div>
+            <div class="media-container">
+                <div class="card1">
+                   <div class="contest-upcoming" id="node" >
+                    <div class="big text-right" style="
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    font-size: 80px;
+    color: white;
+    opacity: .25;
+"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                    <div class="h3 text-fff font-thin h3" style="
+    font-weight: 500;
+    line-height: 18px;
+    font-size: 16px;
+    color: #a0a0a0;
+    padding-left: 10px;
+" id="time">目前没有正在举行的比赛</div>
+                    <div class="" style="
+    margin-top: 5px;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 40px;
+    color: black;
+    font-weight: 100;
+    padding-left: 10px;
+"><b><h2 style="
+    font-weight: 600;
+" id="comName">请稍后回来</h2></b></div>
+                    <div class="" style="
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+">
+                </div>
+                   </div>
+                    <div class="big text-center" id="title">近期要举行的竞赛，快来报名参加吧！</div>
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody id="list">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class=" text-right " id="tran">
+                        <i class="fa fa-caret-down text-warning m-r-sm" onclick="showComp()" style="cursor: pointer;color:#555">下一页</i>
+                    </div>
+                </div>
+
+                <div class="card2">
+                    <div class="virtual-empty reserve-btn-space"><div class="card-bg-icon" style="
+    bottom: 65px;
+    position: absolute;
+    right: 20px;
+    bottom: 35px;
+    font-size: 80px;
+    color: white;
+    opacity: .25;
+"><i class="fa fa-random" aria-hidden="true"></i></div><div class="intro" style="
+    padding-top: 5px;
+    font-size: 16px;
+    color: #a0a0a0;
+    opacity: .8;
+    color: white !important;
+    box-sizing: border-box;
+    padding-left: 10px;
+">随机开始一场</div><br><br>
+                        <div class="card-title" style="
+    padding-left: 10px;
+    margin-top: 5px;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 40px;
+    color: white !important;
+"><a onclick="invented('2')">虚拟竞赛</a>
+                        <div class="btn-group">
+                            <i data-toggle="dropdown" style="cursor: pointer;font-size: 15px;" >选项<span class="caret" style="cursor: pointer;"></span>
+                            </i>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="invented('0')" style="color:black">未做过的</a>
+                                </li>
+                                <li><a onclick="invented('1')" style="color:black" class="font-bold">已做过的</a>
+                                </li>
+                                <li><a onclick="invented('2')" style="color:black">未做过的和已做过的</a>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                        <!--<button onclick="invented('0')" class="btn btn-w-m btn-link">未做过的</button>-->
+                        <!--<button onclick="invented('1')" class="btn btn-w-m btn-link">已做过的</button>-->
+                        <!--<button onclick="invented('2')" class="btn btn-w-m btn-link">未做过的和已做过的</button>-->
+                    </div><div class="hidden-xs vcontest-view-history-btn" style="
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    color: #fbf5f5c2;
+    padding: 0 35px;
+    box-sizing: border-box;
+    cursor: pointer;
+"><div style="
+    padding-top: 15px;
+    padding-bottom: 30px;
+    border-top: 1px solid;
+"><span style="
+    -webkit-transition: .4s all;
+    -o-transition: .4s all;
+    transition: .4s all;
+    opacity: .6;
+" onclick="showCompedList()" data-toggle='modal' data-target='#myModal5'><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; 查看历史</span></div></div>
+                </div>
+            </div>
+    <!--弹窗布局开始-->
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="dialogTitle">参加并提交过的竞赛信息</h4>
+                </div>
+                <div class="ibox-content">
+                    <table id="CompedTable" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <th width="30%">ID</th>
+                        <th width="40%">名称</th>
+                        </thead>
+                        <tbody>
+                        <div id="hei" class="text-center article-title" >还没有参加过的竞赛哦~赶紧去关注一下近期要举行的竞赛吧！</div>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" id="closeUserInfoDialog" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<div class="bottom">
+    <div class="bottom-left">
+        <div class="left-top">
+            <i class="fa fa-trophy fa-5x" style="font-size: 4.5em;"></i>
+            <span class="bottom-title">全校排名</span>
+        </div>
+        <div class="left-media">
+            <div class="winner top-1 text-center">
+                <img src="/css/img/a1.jpg" alt="" class="img">
+                <div class="name-tag">
+                    <div class="content" id="one">1</div>
+                </div>
+            </div>
+            <div class="winner top-2">
+                <img src="/css/img/a2.jpg" alt="" class="img">
+                <div class="name-tag">
+                    <div class="content" id="two">2</div>
+                </div>
+            </div>
+            <div class="winner top-3">
+                <img src="/css/img/third.jpg" alt="" class="img">
+                <div class="name-tag">
+                    <div class="content" id="three">3</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="left-bottom">
+        <!--<div class="col-md-12">-->
+            <!--<div class="forum-icon">-->
+                <!--<h2 class="fa fa-clock-o"></h2>-->
+            <!--</div>-->
+            <!--<a class="forum-item-title">李月</a>-->
+            <!--<div class="forum-sub-title">已经参加过10次竞赛</div>-->
+            <!--<hr>-->
+        <!--</div>-->
+            <div class="ibox-content" style="border-radius: 30px">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>姓名</th>
+                        <th>参加竞赛次数</th>
+                    </tr>
+                    </thead>
+                    <tbody id="rankList">
+
+                    </tbody>
+                </table>
+
+                <a class="btn btn-primary btn-rounded btn-block" onclick="showmore()"><i class="fa fa-info-circle"></i> 显示更多</a>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-right">
+        <div class="ibox-content" style="border-radius:30px;">
+            <div class="font-thin h1">
+                竞赛回顾
+            </div>
+       </div>
+        <div class="ibox-content">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>以往竞赛</th>
+                    <th>时长</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="compList">
+
+                </tbody>
+            </table>
+
+
+        </div>
+        <div class="text-center">
+            <div class="btn-group" id="page">
+                <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i>-->
+                <!--</button>-->
+                <!--<button class="btn btn-white">1</button>-->
+                <!--<button class="btn btn-white">2</button>-->
+                <!--<button class="btn btn-white">3</button>-->
+                <!--<button class="btn btn-white">4</button>-->
+                <!--<button class="btn btn-white">5</button>-->
+                <!--<button class="btn btn-white">6</button>-->
+                <!--<button class="btn btn-white">7</button>-->
+                <!--<button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i>-->
+                <!--</button>-->
+            </div>
+        </div>
+
+</div>
+</div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/OJ/competition/competition.js}"></script>
+
+<!-- 引入公用尾部 -->
+<!--<div th:replace="common/staticHf :: common_footer"></div>-->
+</body>
+</html>

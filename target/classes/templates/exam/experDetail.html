@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-OJ</title>
+    <!--引入公用资源-->
+    <div th:replace="common/staticImport :: common_resource"></div>
+    <style type="text/css">
+        a:link {color: grey;}
+        a:visited{ color: grey; }
+        a:hover{ color: black; }
+        a:active {color: grey;}
+    </style>
+</head>
+<body class="gray-bg">
+
+<!--引入公用头部-->
+<div th:replace="common/staticHf :: common_head"></div>
+
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <ul class="breadcrumb">
+            <li><a href="/index">首页</a></li>
+            <li><a href="/experiment/" id="breadList">实验列表</a></li>
+            <li class="active"><strong id="breadDetail">实验</strong></li>
+        </ul>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="m-b-md">
+                                        <h2 id="experName">实验名称</h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>状态：</dt>
+                                        <dd ><span class="label" id="status">已结束</span>
+                                        </dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>描述：</dt>
+                                        <dd id="description">实验描述</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <dl class="dl-horizontal">
+                                        <dt>发布人：</dt>
+                                        <dd id="admin">数据结构课组</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-sm-7" id="cluster_info">
+                                    <dl class="dl-horizontal">
+                                        <dt>开始时间：</dt>
+                                        <dd id="start"> 年  月 日  : </dd>
+                                        <dt>结束时间：</dt>
+                                        <dd id="end"> 年  月 日  : </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <dl class="dl-horizontal">
+                                        <dt>进度：</dt>
+                                        <dd>
+                                            <div class="progress progress-striped active m-b-sm">
+                                                <div style="width: 60%;" class="progress-bar" id="progrocessBar"></div>
+                                            </div>
+                                            <small>当前已完成实验的 <strong id="progress">60%</strong></small>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row m-t-sm">
+                                <div class="col-sm-12">
+                                    <div class="panel blank-panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-options">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#tab-2" data-toggle="tab">题目列表</a></li>
+                                                    <li><a href="#tab-1" data-toggle="tab">提交情况</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane" id="tab-1">
+                                                    <div class="ibox float-e-margins">
+                                                        <div class="ibox-title">
+                                                            <h5>题目查询</h5>
+                                                        </div>
+                                                        <div class="ibox-content">
+                                                            <form method="get" class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-3 droppable sortable ui-droppable ui-sortable">
+                                                                        <div class="form-group draggable ui-draggable dropped">
+                                                                            <label class="col-sm-4 control-label">题号：</label>
+                                                                            <div class="col-sm-7">
+                                                                                <input id="problemId" type="text" class="form-control" placeholder="请输入题目id">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 droppable sortable ui-droppable ui-sortable">
+                                                                        <div class="form-group draggable ui-draggable dropped">
+                                                                            <label class="col-sm-5 control-label">题目名称：</label>
+                                                                            <div class="col-sm-7">
+                                                                                <input id="problemName" type="text" class="form-control" placeholder="请输入题目名称">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3 droppable sortable ui-droppable ui-sortable">
+                                                                        <div class="form-group draggable ui-draggable dropped">
+                                                                            <label class="col-sm-4 control-label">状态：</label>
+                                                                            <div class="col-sm-7">
+                                                                                <select id="submitState" class="form-control" >
+                                                                                    <option value="" >请选择</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="text-align:right;" class="col-md-2">
+                                                                        <input id="b1"  onclick="getInfo()" type="button" class="btn btn-primary" value="查 询">
+                                                                        <input  id="b2" onclick="resetForm()" type="button" class="btn btn-primary" value="重 置">
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ibox-title">
+                                                        <h5>提交状态</h5>
+                                                    </div>
+                                                    <div class="ibox-content  draggable ui-draggable dropped">
+                                                    <table  class="table table-striped table-bordered table-hover dataTables-example" id = "submit">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="10%">题目ID</th>
+                                                            <th width="10%">题目名称</th>
+                                                            <th width="10%">状态</th>
+                                                            <th width="10%">语言</th>
+                                                            <th width="10%">耗时</th>
+                                                            <th width="10%">内存</th>
+                                                            <th width="10%">长度</th>
+                                                            <th width="10%">时间</th>
+                                                            <th width="10%">操作</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody >
+                                                        </tbody>
+                                                    </table>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane active" id="tab-2">
+                                                    <!--<div class="ibox-title">-->
+                                                        <!--<h5>题目列表</h5>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="ibox-content">-->
+                                                    <table class="table table-striped" id="problems">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="10%">ID</th>
+                                                            <th width="30%">题目</th>
+                                                            <th width="20">分数</th>
+                                                            <th width="20%">状态</th>
+                                                            <th width="20%">操作</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true" >
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content" >
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    代码
+                </div>
+                <div class="panel-body" >
+                    <pre id="code" style=" overflow:scroll;"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="'btn btn-primary" id="closeInfoDialog" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹窗-->
+<div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+        <input type="hidden" id="proid" value="">
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/js/OJ/exam/isTestStudent.js}"></script>
+<script type="text/javascript" th:src="@{/js/OJ/exam/experDetail.js}"></script>
+
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</html>

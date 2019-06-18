@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">D-OJ</title>
+</head>
+<body class="gray-bg">
+<!--引入公用资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<!--引入公用头部-->
+<div th:replace="common/staticHf :: common_head"></div>
+<div class="rootDiv">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <ul class="breadcrumb">
+            <li><a href="/index">首页</a></li>
+            <li class="active" ><strong id="bread">实验列表</strong></li>
+        </ul>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5 id="t">所有实验</h5>
+                        <div class="ibox-tools">
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="ibox-content text-center" id="tableNull">
+                            <div class="blank-img" >
+                                <img src="/css/img/blank1.jpg" id="blankImg">
+                            </div>
+                        </div>
+                        <div class="project-list" >
+                            <table class="table table-hover" id="table">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/OJ/exam/experList.js}"></script>
+</body>
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</html>

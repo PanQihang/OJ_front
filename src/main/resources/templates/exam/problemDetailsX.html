@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/selectcolor.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/codemirror.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/3024-night.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/erlang-dark.css}"/>
+
+
+    <title>D-OJ</title>
+</head>
+
+<body class="gray-bg">
+<!--引入公用资源-->
+<div th:replace="common/staticImport :: common_resource"></div>
+<!--引入公用头部-->
+<div th:replace="common/staticHf :: common_head"></div>
+<div class="rootDiv">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row" style=" ">
+                    <div class="wrapper wrapper-content  animated fadeInRight article">
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <div class="ibox">
+                                    <div class="ibox-content" style="background:antiquewhite; ">
+                                        <div class="pull-left">
+
+                                            <a class="close-link" title="" data-toggle='modal' data-target='#myModal5C'>
+                                                <button class="btn btn-primary btn-m" type="button">提交代码</button>
+                                            </a>
+                                            <!--<button class="btn btn-white btn-xs" type="button">操作E</button>-->
+                                        </div>
+                                        <div class="pull-right">
+                                            <span id='proAcPercentageTip' class="label label-primary">AC率:未知</span>
+                                            <span id='proAcNumTip' class="label label-info">AC:未知</span>
+                                            <span id='proSubNumTip' class="label label-success">SUB:未知</span>
+                                        </div>
+                                        <div class="text-center article-title "
+                                             style="height:35px; margin: 30px 0 15px 0; ">
+                                            <span id='problemName' style="font-size:25px; ">题目名称</span>&nbsp;<span
+                                                style="font-size:11px; margin-left:10px; ">题目编号:</span><span
+                                                id='problemId' style="font-size:11px;">题目编号</span>
+                                        </div>
+                                        <!--<textarea id='problemDescription' style="width:100%; resize:none; " readonly="true"> </textarea>-->
+                                        <!--<pre id="problemDescription"></pre>-->
+                                        <p id="problemDescription"></p>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <h3>输入描述</h3>
+                                                <div class="social-feed-box"
+                                                     style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="inputDescription"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                                </div>
+                                                <h3>输出描述</h3>
+                                                <div class="social-feed-box"
+                                                     style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="outputDescription"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                                </div>
+                                                <h3>输入样例</h3>
+                                                <div class="social-feed-box"
+                                                     style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="inputSample"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                                </div>
+                                                <h3>输出样例</h3>
+                                                <div class="social-feed-box"
+                                                     style="border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px;">
+                                                    <pre id="outputSample"
+                                                         style="width:100%; resize:none; border:0px solid; margin:0 0 0 0; padding:0 0 0 0; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word;"
+                                                         readonly="true"></pre>
+                                                </div>
+                                                <div style="border:0px solid; margin:10px 0 0 0; padding:0 0 0 0; ">
+                                                    <span id='MemoryThresholdTip'
+                                                          class="badge badge-danger">内存阀值:未知</span>
+                                                    <span id='RunTimeThresholdTip'
+                                                          class="badge badge-danger">耗时阀值:未知</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal fade" id="myModal5C" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="editAreaProName" style="font-size:20px; ">未知</span>&nbsp;<span id="editAreaProId" style="font-size:10px; ">编号:未知</span>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body" style="padding:10px 15px 10px 15px; ">
+                <div class="form-group">
+                    <div class="col-md-12 droppable sortable ui-droppable ui-sortable" style="width: 100%">
+                        <div class="form-group draggable ui-draggable dropped">
+                            <div class="col-sm-12">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <span>提交结果:</span><span id='submitResult' style="color:darkgrey; " >未知</span>&nbsp;<span id="submitInf" style="color:gainsboro; "></span>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div>
+                                            <div class="controls">
+                                                <input class="ck-code" type="radio" name="script_once_type"
+                                                       id="languageC" checked> C
+                                                <input class="ck-code" type="radio" name="script_once_type"
+                                                       id="languageCPP"> C++
+                                                <input class="ck-code" type="radio" name="script_once_type"
+                                                       id="languageJava"> Java
+                                                <input class="ck-code" type="radio" name="script_once_type"
+                                                       id="languagePython"> python
+                                            </div>
+                                            <div class="controls">
+                                                <select id='selectEditAreaStyle'>
+                                                    <option selected>default</option>
+                                                    <option>3024-night</option>
+                                                    <option>erlang-dark</option>
+                                                </select>
+                                            </div>
+                                            <div style='width:100%; height:400px;'>
+                                                <textarea id="codeEditArea"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick='submitCode()' class="btn btn-primary btn-m" type="button">提交代码</button>
+                <button type="button" class="btn btn-primary btn-m" data-dismiss="modal" style="background:black; ">
+                    返回题目
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--提交代码后的等待图标（有没有必要呢，想想.....）-->
+<div class="spiner-example" style="position:absolute; margin:0 auto; display:none; ">
+    <div class="sk-spinner sk-spinner-fading-circle">
+        <div class="sk-circle1 sk-circle"></div>
+        <div class="sk-circle2 sk-circle"></div>
+        <div class="sk-circle3 sk-circle"></div>
+        <div class="sk-circle4 sk-circle"></div>
+        <div class="sk-circle5 sk-circle"></div>
+        <div class="sk-circle6 sk-circle"></div>
+        <div class="sk-circle7 sk-circle"></div>
+        <div class="sk-circle8 sk-circle"></div>
+        <div class="sk-circle9 sk-circle"></div>
+        <div class="sk-circle10 sk-circle"></div>
+        <div class="sk-circle11 sk-circle"></div>
+        <div class="sk-circle12 sk-circle"></div>
+    </div>
+</div>
+<script th:inline="javascript">
+    var Info = [[${info}]];
+    console.log("####info对象的内容如下");
+    console.log(Info);
+
+</script>
+<script type="text/javascript" th:src="@{/js/OJ/exam/codemirror.js}"></script>
+<script type="text/javascript" th:src="@{/js/clike.js}"></script>
+<script type="text/javascript" th:src="@{/js/python.js}"></script>
+<script type="text/javascript" th:src="@{/js/OJ/exam/problemDetailsX.js}"></script>
+</body>
+<!-- 引入公用尾部 -->
+<div th:replace="common/staticHf :: common_footer"></div>
+</html>
